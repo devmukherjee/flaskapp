@@ -1,0 +1,15 @@
+name: flask-app-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9  # Or your desired Python version
+  - flask
+  - gunicorn  # For production WSGI server
+  - Jinja2      # Flask's templating engine
+  - Werkzeug    # WSGI utility library
+  - itsdangerous # Securely sign data
+  - click       # Command-line interface creation
+  - MarkupSafe  # Escaping untrusted text
+  - pip
+    # Add any pip-specific dependencies here
+    # - some-pip-package==1.2.3
