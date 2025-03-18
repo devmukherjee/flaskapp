@@ -1,0 +1,11 @@
+use 
+  conda env export --from-history > environment.yml
+use
+  pip freeze > requirements.txt
+
+use docker build -t flask-app .
+
+use docker run -p 5000:5000
+
+ 
+ 
