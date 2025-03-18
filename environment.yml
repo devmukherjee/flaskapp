@@ -1,0 +1,6 @@
+name: fresh_flask
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+prefix: F:\Installed\anaconda3\envs\fresh_flask

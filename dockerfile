@@ -5,33 +5,31 @@ FROM continuumio/miniconda3:latest
 WORKDIR /app
 
 # Copy the environment.yml file into the container at /app
-COPY new_flask_env.yml /app
+COPY environment.yml .
 
 # Create the conda environment
-RUN conda env create -f new_flask_env.yml
+RUN conda env create -f environment.yml
 # Activate the conda environment
 # SHELL ["conda", "activate", "-n", "flask_app_env", "/bin/bash", "-c"]
 # SHELL ["conda", "init","/bin/bash", "-c"]
 # # SHELL ["conda", "activate","flask-app-env", "/bin/bash", "-c"]
-SHELL ["conda", "run", "-n", "new_flask_env", "/bin/bash", "-c"]
+SHELL ["conda", "run", "-n", "fresh_flask", "/bin/bash", "-c"]
+COPY . .
 # RUN  conda init
-
+RUN pip install -r requirements.txt
 
 # RUN activate new_flask_env
 
 # RUN pip install flask
-# Copy the rest of the application code
-COPY . /app
 
 # Make port 5000 available to the world outside this container
-EXPOSE 10002
+EXPOSE 5000
+ENV FLASK_APP="app.py"
 
-# Define environment variable
-ENV FLASK_APP=main.py
+# Copy the shell script
+COPY start_app.sh /usr/local/bin/start_app.sh
+RUN chmod +x /usr/local/bin/start_app.sh
 
-# Create a shell script
-COPY my_commands.sh /usr/local/bin/my_commands.sh
-RUN chmod +x /usr/local/bin/my_commands.sh
+# Set the command to run the script
+CMD ["/usr/local/bin/start_app.sh"]
 
-# Execute the shell script
-CMD ["/usr/local/bin/my_commands.sh"]
