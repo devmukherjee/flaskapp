@@ -6,6 +6,7 @@ use
 use docker build -t flask-app .
 
 use docker run -p 5000:5000
+use conda clean -a
 
  
  
