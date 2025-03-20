@@ -26,6 +26,9 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 ENV FLASK_APP="app.py"
 
-RUN conda clean -a
-CMD ["conda", "run", "-n", "fresh_flask", "python", "app.py"]
+# Copy the shell script
+COPY start_app.sh /usr/local/bin/start_app.sh
+RUN chmod +x /usr/local/bin/start_app.sh
 
+# Set the command to run the script
+CMD ["/usr/local/bin/start_app.sh"]
